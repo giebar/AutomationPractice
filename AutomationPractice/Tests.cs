@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System;
 using System.Threading;
 
 namespace AutomationPractice
@@ -9,7 +11,7 @@ namespace AutomationPractice
         private string URL = "http://automationpractice.com/index.php";
 
         //registration data
-        string reg_email = "fghjnanff@gresgs.lt";
+        string reg_email = "khkknkymhni@gresgs.lt";
 
         //login data
         string login_email = "testas@testukas.lt";
@@ -21,6 +23,7 @@ namespace AutomationPractice
             Driver = new ChromeDriver();
             Driver.Navigate().GoToUrl(URL);
             Driver.Manage().Window.Maximize();
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         [Test]
@@ -31,7 +34,6 @@ namespace AutomationPractice
             LoginPage loginPage = new LoginPage();
             loginPage.EnterEmail(reg_email);
             loginPage.ClickSignUpBtn();
-            Thread.Sleep(5000);
             RegistrationPage registrationPage = new RegistrationPage();
             registrationPage.FillFormAndRegister();
             AccountPage accountPage = new AccountPage();
@@ -68,7 +70,6 @@ namespace AutomationPractice
             searchPage.ClickOnProduct();
             ProductPage productPage = new ProductPage();
             productPage.ClickAddTooCart();  
-            Thread.Sleep(2000);
             productPage.ClickProceedToCheckout();
             CartSummaryPage cartSummaryPage = new CartSummaryPage();
             cartSummaryPage.ClickSummaryCheckout();
